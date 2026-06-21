@@ -1,0 +1,29 @@
+# Vertical experts → file glob mapping.
+# Single source of truth used by:
+#   1. .claude/hooks/sync_experts_on_session_end.sh (auto-sync on Claude close)
+#   2. .claude/commands/sync-experts.md (manual /sync-experts slash command)
+#
+# Each top-level key under `experts:` is a DOMAIN. Each lists glob patterns
+# (fnmatch + {a,b,c} brace-expansion supported) covering the files whose
+# changes should trigger a refresh of that domain's expertise.yaml.
+#
+# Editing rules:
+# - One expert = ONE business domain across all layers (NOT one layer across
+#   all domains — that pattern doesn't work; see README).
+# - Keep patterns specific. Over-broad globs cause needless self-improve runs.
+# - When you ADD or RENAME a major file in a domain, update the relevant glob.
+# - When you ADD a new vertical expert: add it here AND create the
+#   .claude/commands/experts/<name>/{expertise.yaml,self-improve.md,question.md} trio.
+#
+# ---------------------------------------------------------------------------
+# The block below is an EXAMPLE. Delete it and add your own domains.
+# ---------------------------------------------------------------------------
+
+experts:
+  example-domain:
+    globs:
+      - "src/payments/**/*.ts"
+      - "src/billing/**/*.ts"
+      - "migrations/*payment*.sql"
+      # Brace expansion is allowed:
+      # - "internal/{auth,session,oauth}/**/*.go"
