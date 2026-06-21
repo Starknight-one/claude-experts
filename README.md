@@ -22,8 +22,8 @@ repo's `.claude/` and the expertise files get committed alongside your code.
 ## Install
 
 ```bash
-git clone https://github.com/<owner>/<repo>.git
-cd <repo>
+git clone https://github.com/Starknight-one/claude-experts.git
+cd claude-experts
 ./install.sh /path/to/your/project      # defaults to the current directory
 ```
 
